@@ -3,31 +3,17 @@ import { motion } from 'framer-motion';
 import { Mail, Phone, MapPin, Linkedin, Send, CheckCircle } from 'lucide-react';
 
 const Contact: React.FC = () => {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    message: ''
-  });
   const [isSubmitted, setIsSubmitted] = useState(false);
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
-  };
-
   const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // In a real application, you would send the data to your backend
-    console.log('Form submitted:', formData);
+    // Netlify Forms handles the submission automatically
+    // The form will be processed by Netlify when deployed
     setIsSubmitted(true);
     
-    // Reset form after 3 seconds
+    // Reset success message after 5 seconds
     setTimeout(() => {
       setIsSubmitted(false);
-      setFormData({ name: '', email: '', message: '' });
-    }, 3000);
+    }, 5000);
   };
 
   const contactInfo = [
@@ -198,67 +184,76 @@ const Contact: React.FC = () => {
                 Send me a message
               </h3>
 
-              {!isSubmitted ? (
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  <motion.div variants={itemVariants}>
-                    <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                      Full Name
-                    </label>
-                    <input
-                      type="text"
-                      id="name"
-                      name="name"
-                      value={formData.name}
-                      onChange={handleInputChange}
-                      required
-                      className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-blue-600 focus:border-transparent bg-white dark:bg-gray-800 text-gray-900 dark:text-white transition-all duration-200"
-                      placeholder="Your full name"
-                    />
-                  </motion.div>
+                             {!isSubmitted ? (
+                 <form 
+                   name="contact" 
+                   method="POST" 
+                   data-netlify="true"
+                   netlify-honeypot="bot-field"
+                   onSubmit={handleSubmit}
+                   className="space-y-6"
+                 >
+                   {/* Netlify Forms hidden input */}
+                   <input type="hidden" name="form-name" value="contact" />
+                   <p className="hidden">
+                     <label>
+                       Don't fill this out if you're human: <input name="bot-field" />
+                     </label>
+                   </p>
+                   
+                   <motion.div variants={itemVariants}>
+                     <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                       Full Name
+                     </label>
+                     <input
+                       type="text"
+                       id="name"
+                       name="name"
+                       required
+                       className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-blue-600 focus:border-transparent bg-white dark:bg-gray-800 text-gray-900 dark:text-white transition-all duration-200"
+                       placeholder="Your full name"
+                     />
+                   </motion.div>
 
-                  <motion.div variants={itemVariants}>
-                    <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                      Email Address
-                    </label>
-                    <input
-                      type="email"
-                      id="email"
-                      name="email"
-                      value={formData.email}
-                      onChange={handleInputChange}
-                      required
-                      className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-blue-600 focus:border-transparent bg-white dark:bg-gray-800 text-gray-900 dark:text-white transition-all duration-200"
-                      placeholder="your.email@example.com"
-                    />
-                  </motion.div>
+                   <motion.div variants={itemVariants}>
+                     <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                       Email Address
+                     </label>
+                     <input
+                       type="email"
+                       id="email"
+                       name="email"
+                       required
+                       className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-blue-600 focus:border-transparent bg-white dark:bg-gray-800 text-gray-900 dark:text-white transition-all duration-200"
+                       placeholder="your.email@example.com"
+                     />
+                   </motion.div>
 
-                  <motion.div variants={itemVariants}>
-                    <label htmlFor="message" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                      Message
-                    </label>
-                    <textarea
-                      id="message"
-                      name="message"
-                      value={formData.message}
-                      onChange={handleInputChange}
-                      required
-                      rows={5}
-                      className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-blue-600 focus:border-transparent bg-white dark:bg-gray-800 text-gray-900 dark:text-white transition-all duration-200 resize-none"
-                      placeholder="Tell me about your project or just say hello!"
-                    />
-                  </motion.div>
-
-                  <motion.button
-                    variants={itemVariants}
-                    whileHover={{ scale: 1.05, y: -2 }}
-                    whileTap={{ scale: 0.95 }}
-                    type="submit"
-                    className="w-full flex items-center justify-center space-x-2 bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white px-8 py-4 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all duration-300"
-                  >
-                    <Send size={20} />
-                    <span>Send Message</span>
-                  </motion.button>
-                </form>
+                   <motion.div variants={itemVariants}>
+                     <label htmlFor="message" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                       Message
+                     </label>
+                     <textarea
+                       id="message"
+                       name="message"
+                       required
+                       rows={5}
+                       className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-blue-600 focus:border-transparent bg-white dark:bg-gray-800 text-gray-900 dark:text-white transition-all duration-200 resize-none"
+                       placeholder="Tell me about your project or just say hello!"
+                     />
+                   </motion.div>
+                   
+                   <motion.button
+                     variants={itemVariants}
+                     whileHover={{ scale: 1.05, y: -2 }}
+                     whileTap={{ scale: 0.95 }}
+                     type="submit"
+                     className="w-full flex items-center justify-center space-x-2 bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white px-8 py-4 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all duration-300"
+                   >
+                     <Send size={20} />
+                     <span>Send Message</span>
+                   </motion.button>
+                 </form>
               ) : (
                 <motion.div
                   initial={{ opacity: 0, scale: 0.8 }}

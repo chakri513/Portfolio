@@ -3,10 +3,6 @@ import { motion } from 'framer-motion';
 import { Heart, Github, Linkedin, Mail, ArrowUp, Code } from 'lucide-react';
 
 const Footer: React.FC = () => {
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
-
   const navLinks = [
     { label: 'Home', href: '#home' },
     { label: 'About', href: '#about' },
@@ -16,7 +12,7 @@ const Footer: React.FC = () => {
   ];
 
   const socialLinks = [
-    { icon: Github, href: '#', label: 'GitHub' },
+    { icon: Github, href: 'https://github.com/chakri513', label: 'GitHub' },
     { icon: Linkedin, href: 'https://www.linkedin.com/in/chakradharreddy-bijjamula/', label: 'LinkedIn' },
     { icon: Mail, href: 'mailto:chakradharreddybijjamula@gmail.com', label: 'Email' }
   ];
@@ -40,9 +36,7 @@ const Footer: React.FC = () => {
                 Chakradhar Reddy Bijjamula
               </h3>
               <p className="text-gray-400 leading-relaxed">
-                Passionate BTech student and aspiring software developer, dedicated to creating 
-                innovative solutions that make a meaningful impact. Currently interning at Coastal Seven 
-                and always eager to learn and grow.
+                Dedicated to creating innovative solutions that make a meaningful impact and always eager to learn and grow.
               </p>
             </motion.div>
 
@@ -53,9 +47,6 @@ const Footer: React.FC = () => {
               transition={{ delay: 0.1 }}
               className="flex items-center space-x-2 text-sm text-gray-400"
             >
-              <Code size={16} />
-              <span>Built with React, TypeScript & Framer Motion</span>
-              <Heart size={16} className="text-red-400" />
             </motion.div>
           </div>
 
@@ -114,8 +105,15 @@ const Footer: React.FC = () => {
               transition={{ delay: 0.1 }}
               className="space-y-3 mb-6"
             >
-              <div className="text-sm text-gray-400">
-                <div>chakradharreddybijjamula@gmail.com</div>
+              <div className="text-sm text-gray-400 space-y-2">
+                <div>
+                  <a 
+                    href="mailto:chakradharreddybijjamula@gmail.com"
+                    className="hover:text-cyan-400 transition-colors duration-200"
+                  >
+                    chakradharreddybijjamula@gmail.com
+                  </a>
+                </div>
                 <div>+91 8074691024</div>
                 <div>Guntur, India</div>
               </div>
@@ -152,37 +150,21 @@ const Footer: React.FC = () => {
       {/* Bottom Bar */}
       <div className="border-t border-gray-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-            <motion.p
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              className="text-sm text-gray-400 text-center md:text-left"
-            >
-              © {currentYear} Chakradhar Reddy Bijjamula. All rights reserved. 
-              <span className="block md:inline md:ml-2">
-                Designed & developed with passion for innovation.
-              </span>
-            </motion.p>
-
-            <motion.button
-              onClick={scrollToTop}
-              whileHover={{ scale: 1.1, y: -2 }}
-              whileTap={{ scale: 0.9 }}
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              className="flex items-center space-x-2 px-4 py-2 bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 rounded-lg transition-all duration-300 text-sm font-medium"
-            >
-              <ArrowUp size={16} />
-              <span>Back to Top</span>
-            </motion.button>
-          </div>
+          <motion.p
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            className="text-sm text-gray-400 text-center"
+          >
+            © {currentYear} Chakradhar Reddy Bijjamula. All rights reserved. 
+            <span className="block md:inline md:ml-2">
+              Designed & developed with passion for innovation.
+            </span>
+          </motion.p>
         </div>
       </div>
 
-      {/* Decorative Elements */}
-      <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-blue-600 via-cyan-600 to-blue-600" />
+
     </footer>
   );
 };

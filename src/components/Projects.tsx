@@ -14,44 +14,44 @@ const Projects: React.FC = () => {
         'Healthcare analytics dashboard',
         'Emergency care routing system'
       ],
-      techStack: ['Python', 'Machine Learning', 'Flask', 'React', 'PostgreSQL'],
+      techStack: ['Python', 'Machine Learning', 'FastAPI', 'React', 'MongoDB'],
       icon: Heart,
       color: 'from-red-500 to-pink-600',
       image: 'https://images.pexels.com/photos/40568/medical-appointment-doctor-healthcare-40568.jpeg',
       category: 'Healthcare AI'
     },
-    {
-      id: 2,
-      title: 'AI-Powered Mock Interview App',
-      description: 'Comprehensive AI-driven mock interview platform that provides real-time feedback, speech analysis, and personalized improvement suggestions.',
-      features: [
-        'AI speech recognition and analysis',
-        'Real-time feedback system',
-        'Interview performance analytics',
-        'Customizable interview scenarios'
-      ],
-      techStack: ['Python', 'Natural Language Processing', 'React', 'Node.js', 'MongoDB'],
-      icon: Brain,
-      color: 'from-purple-500 to-blue-600',
-      image: 'https://images.pexels.com/photos/5668473/pexels-photo-5668473.jpeg',
-      category: 'AI Application'
-    },
-    {
-      id: 3,
-      title: 'Nexus - Disaster Response Web App',
-      description: 'Emergency response coordination platform that facilitates rapid disaster response through real-time communication and resource management.',
-      features: [
-        'Real-time disaster reporting',
-        'Resource allocation system',
-        'Emergency contact coordination',
-        'Geographical incident mapping'
-      ],
-      techStack: ['React', 'Node.js', 'Socket.io', 'MongoDB', 'Google Maps API'],
-      icon: Shield,
-      color: 'from-orange-500 to-red-600',
-      image: 'https://images.pexels.com/photos/73833/wax-fire-burns-hot-73833.jpeg',
-      category: 'Emergency Response'
-    }
+         {
+       id: 2,
+       title: 'AI-Powered Mock Interview App (InterviewGenius)',
+       description: 'Comprehensive AI-driven mock interview platform that provides real-time feedback, speech analysis, and personalized improvement suggestions using Google Gemini Pro API.',
+       features: [
+         'AI speech recognition and analysis',
+         'Real-time feedback system',
+         'Interview performance analytics',
+         'Customizable interview scenarios'
+       ],
+       techStack: ['Python', 'FastAPI', 'PostgreSQL', 'Google Gemini Pro API', 'HTML/CSS/JavaScript'],
+       icon: Brain,
+       color: 'from-purple-500 to-blue-600',
+       image: '/images/ai-interview.jpeg',
+       category: 'AI Application'
+     },
+         {
+       id: 3,
+       title: 'Nexus - Disaster Response Web App',
+       description: 'Comprehensive disaster relief platform designed to connect individuals, relief organizations, and government agencies during times of crisis with real-time coordination.',
+       features: [
+         'Volunteer-Victim Connection',
+         'Real-Time Interactive Maps',
+         'Real-Time Chat System',
+         'Resource Management Dashboard'
+       ],
+       techStack: ['HTML', 'CSS', 'JavaScript', 'Google Maps API'],
+       icon: Shield,
+       color: 'from-orange-500 to-red-600',
+       image: '/images/disater_img.jpg',
+       category: 'Emergency Response'
+     }
   ];
 
   const containerVariants = {
@@ -70,8 +70,7 @@ const Projects: React.FC = () => {
       opacity: 1, 
       y: 0,
       transition: {
-        duration: 0.6,
-        ease: "easeOut"
+        duration: 0.6
       }
     }
   };
@@ -200,26 +199,96 @@ const Projects: React.FC = () => {
                   </div>
                 </div>
 
-                {/* Action Buttons */}
-                <div className="flex space-x-4">
-                  <motion.button
-                    whileHover={{ scale: 1.05, y: -2 }}
-                    whileTap={{ scale: 0.95 }}
-                    className="flex items-center space-x-2 bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white px-6 py-3 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all duration-300"
-                  >
-                    <ExternalLink size={18} />
-                    <span>Live Demo</span>
-                  </motion.button>
-                  
-                  <motion.button
-                    whileHover={{ scale: 1.05, y: -2 }}
-                    whileTap={{ scale: 0.95 }}
-                    className="flex items-center space-x-2 border-2 border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:border-blue-600 hover:text-blue-600 dark:hover:border-cyan-400 dark:hover:text-cyan-400 px-6 py-3 rounded-xl font-semibold transition-all duration-300"
-                  >
-                    <Github size={18} />
-                    <span>Source Code</span>
-                  </motion.button>
-                </div>
+                                 {/* Action Buttons */}
+                 <div className="flex space-x-4">
+                   {project.id === 1 ? (
+                     <>
+                       <motion.button
+                         whileHover={{ scale: 1.05, y: -2 }}
+                         whileTap={{ scale: 0.95 }}
+                         onClick={() => window.open('https://mediconnect-sooty.vercel.app', '_blank')}
+                         className="flex items-center space-x-2 bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white px-6 py-3 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all duration-300"
+                       >
+                         <ExternalLink size={18} />
+                         <span>Live Demo</span>
+                       </motion.button>
+                       
+                       <motion.button
+                         whileHover={{ scale: 1.05, y: -2 }}
+                         whileTap={{ scale: 0.95 }}
+                         onClick={() => window.open('https://github.com/Coastal-Seven/Mediconnect', '_blank')}
+                         className="flex items-center space-x-2 border-2 border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:border-blue-600 hover:text-blue-600 dark:hover:border-cyan-400 dark:hover:text-cyan-400 px-6 py-3 rounded-xl font-semibold transition-all duration-300"
+                       >
+                         <Github size={18} />
+                         <span>Source Code</span>
+                       </motion.button>
+                     </>
+                   ) : project.id === 2 ? (
+                     <>
+                       <motion.button
+                         whileHover={{ scale: 1.05, y: -2 }}
+                         whileTap={{ scale: 0.95 }}
+                         onClick={() => window.open('http://127.0.0.1:8000', '_blank')}
+                         className="flex items-center space-x-2 bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white px-6 py-3 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all duration-300"
+                       >
+                         <ExternalLink size={18} />
+                         <span>Live Demo</span>
+                       </motion.button>
+                       
+                       <motion.button
+                         whileHover={{ scale: 1.05, y: -2 }}
+                         whileTap={{ scale: 0.95 }}
+                         onClick={() => window.open('https://github.com/chakri513/interviewGenius', '_blank')}
+                         className="flex items-center space-x-2 border-2 border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:border-blue-600 hover:text-blue-600 dark:hover:border-cyan-400 dark:hover:text-cyan-400 px-6 py-3 rounded-xl font-semibold transition-all duration-300"
+                       >
+                         <Github size={18} />
+                         <span>Source Code</span>
+                       </motion.button>
+                     </>
+                                       ) : project.id === 3 ? (
+                      <>
+                        <motion.button
+                          whileHover={{ scale: 1.05, y: -2 }}
+                          whileTap={{ scale: 0.95 }}
+                          onClick={() => window.open('https://nexus-seven-nu.vercel.app/', '_blank')}
+                          className="flex items-center space-x-2 bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white px-6 py-3 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all duration-300"
+                        >
+                          <ExternalLink size={18} />
+                          <span>Live Demo</span>
+                        </motion.button>
+                        
+                        <motion.button
+                          whileHover={{ scale: 1.05, y: -2 }}
+                          whileTap={{ scale: 0.95 }}
+                          onClick={() => window.open('https://github.com/chakri513/NEXUS', '_blank')}
+                          className="flex items-center space-x-2 border-2 border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:border-blue-600 hover:text-blue-600 dark:hover:border-cyan-400 dark:hover:text-cyan-400 px-6 py-3 rounded-xl font-semibold transition-all duration-300"
+                        >
+                          <Github size={18} />
+                          <span>Source Code</span>
+                        </motion.button>
+                      </>
+                    ) : (
+                      <>
+                        <motion.button
+                          whileHover={{ scale: 1.05, y: -2 }}
+                          whileTap={{ scale: 0.95 }}
+                          className="flex items-center space-x-2 bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white px-6 py-3 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all duration-300"
+                        >
+                          <ExternalLink size={18} />
+                          <span>Live Demo</span>
+                        </motion.button>
+                        
+                        <motion.button
+                          whileHover={{ scale: 1.05, y: -2 }}
+                          whileTap={{ scale: 0.95 }}
+                          className="flex items-center space-x-2 border-2 border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:border-blue-600 hover:text-blue-600 dark:hover:border-cyan-400 dark:hover:text-cyan-400 px-6 py-3 rounded-xl font-semibold transition-all duration-300"
+                        >
+                          <Github size={18} />
+                          <span>Source Code</span>
+                        </motion.button>
+                      </>
+                    )}
+                 </div>
               </div>
             </motion.div>
           ))}
@@ -253,7 +322,7 @@ const Projects: React.FC = () => {
               </motion.div>
               <motion.div whileHover={{ scale: 1.05 }} className="text-center">
                 <Database size={40} className="mx-auto mb-3 opacity-80" />
-                <div className="text-2xl font-bold">12+</div>
+                <div className="text-2xl font-bold">10+</div>
                 <div className="opacity-90">Technologies Used</div>
               </motion.div>
               <motion.div whileHover={{ scale: 1.05 }} className="text-center">
